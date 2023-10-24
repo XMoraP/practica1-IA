@@ -1,41 +1,90 @@
+:- dynamic (casilla/3).
+
 % rules
 
-% columna(C):- Head = a, Rest = [b,c,d,e,f,g,h], C = [Head|Rest].
+movimientoDD(Ficha, FilaDestino, ColumnaDestino):-
 
-
-% fila(F):- Head = 1, Rest = [2,3,4,5,6,7,8], F = [Head|Rest].
-
-
-% tablero(T):- columna(C), fila(F), T = [F|C].
-
-movimientoValido(FilaDestino, ColumnaDestino):- 
-    casilla(FilaOrigen, ColumnaOrigen),
-    columna(ColumnaOrigen),
-    fila(FilaOrigen),
-    Movimiento1 is ColumnaDestino - ColumnaOrigen,
-    Movimiento2 is FilaDestino - FilaOrigen,
+    % Movimiento válido para un ficha blanca hacia la derecha  
+    FilaDestino \= 1,
+    Ficha == blanca,
+    FilaOrigen is FilaDestino - 1,
+    ColumnaOrigen is ColumnaDestino - 1,
+    casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
+    Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
-    Movimiento2 == 1.
+    Movimiento2 == 1,
+    asserta(casilla(Ficha, FilaDestino, ColumnaDestino)),
+    retract(casilla(Ficha, FilaOrigen, ColumnaOrigen));
+
+    % movimiento válido para una ficha negra hacia derecha
+    FilaDestino \= 1,
+    Ficha == negra,
+    FilaOrigen is FilaDestino + 1,
+    ColumnaOrigen is ColumnaDestino + 1,
+    casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
+    Movimiento2 is abs(FilaDestino - FilaOrigen),
+    Movimiento1 == 1,
+    Movimiento2 == 1,
+    asserta(casilla(Ficha, FilaDestino, ColumnaDestino)),
+    retract(casilla(Ficha, FilaOrigen, ColumnaOrigen)).
+
+movimientoDI(Ficha, FilaDestino, ColumnaDestino):-
+
+    % movimiento válido para una ficha blanca hacia la izquierda
+    FilaDestino \= 1,
+    Ficha == blanca,
+    FilaOrigen is FilaDestino - 1,
+    ColumnaOrigen is ColumnaDestino + 1,
+    casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
+    Movimiento2 is abs(FilaDestino - FilaOrigen),
+    Movimiento1 == 1,
+    Movimiento2 == 1,
+    asserta(casilla(Ficha, FilaDestino, ColumnaDestino)),
+    retract(casilla(Ficha, FilaOrigen, ColumnaOrigen));
+
+    % movimiento válido para una ficha negra hacia la izquierda
+    FilaDestino \= 1,
+    Ficha == negra,
+    FilaOrigen is FilaDestino + 1,
+    ColumnaOrigen is ColumnaDestino - 1,
+    casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
+    Movimiento2 is abs(FilaDestino - FilaOrigen),
+    Movimiento1 == 1,
+    Movimiento2 == 1,
+    asserta(casilla(Ficha, FilaDestino, ColumnaDestino)),
+    retract(casilla(Ficha, FilaOrigen, ColumnaOrigen)).        
 
 % facts
 
-columna(1).
-columna(2).
-columna(3).
-columna(4).
-columna(5).
-columna(6).
-columna(7).
-columna(8).
+casilla(blanca, 2, 1).
+casilla(blanca, 3, 2).
+casilla(blanca, 1, 2).
+casilla(blanca, 2, 3).
+casilla(blanca, 3, 4).
+casilla(blanca, 1, 4).
+casilla(blanca, 2, 5).
+casilla(blanca, 3, 6).
+casilla(blanca, 1, 6).
+casilla(blanca, 2, 7).
+casilla(blanca, 3, 8).
+casilla(blanca, 1, 8).
 
-fila(1).
-fila(2).
-fila(3).
-fila(4).
-fila(5).
-fila(6).
-fila(7).
-fila(8).
+casilla(negra, 8, 1).
+casilla(negra, 6, 1).
+casilla(negra, 7, 2).
+casilla(negra, 8, 3).
+casilla(negra, 6, 3).
+casilla(negra, 7, 4).
+casilla(negra, 8, 5).
+casilla(negra, 6, 5).
+casilla(negra, 7, 6).
+casilla(negra, 8, 7).
+casilla(negra, 6, 7).
+casilla(negra, 7, 8).
 
-casilla(2, 1).
+
 
