@@ -2,6 +2,9 @@
 
 % rules
 
+casillaOcupada(Fila, Columna):-
+    casilla(_, Fila, Columna).        
+
 movimientoDD(Ficha, FilaDestino, ColumnaDestino):-
 
     % Movimiento válido para un ficha blanca hacia la derecha  
@@ -10,6 +13,7 @@ movimientoDD(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino - 1,
     ColumnaOrigen is ColumnaDestino - 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    \+ casillaOcupada(FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
@@ -23,6 +27,7 @@ movimientoDD(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino + 1,
     ColumnaOrigen is ColumnaDestino + 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    \+ casillaOcupada(FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
@@ -38,6 +43,7 @@ movimientoDI(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino - 1,
     ColumnaOrigen is ColumnaDestino + 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    \+ casillaOcupada(FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
@@ -51,16 +57,16 @@ movimientoDI(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino + 1,
     ColumnaOrigen is ColumnaDestino - 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
+    \+ casillaOcupada(FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
     Movimiento2 == 1,
     asserta(casilla(Ficha, FilaDestino, ColumnaDestino)),
-    retract(casilla(Ficha, FilaOrigen, ColumnaOrigen)).        
+    retract(casilla(Ficha, FilaOrigen, ColumnaOrigen)).
 
 % facts
-
-casilla(blanca, 2, 1).
+asilla(blanca, 2, 1).
 casilla(blanca, 3, 2).
 casilla(blanca, 1, 2).
 casilla(blanca, 2, 3).
