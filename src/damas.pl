@@ -85,6 +85,3 @@ casilla(negra, 7, 6).
 casilla(negra, 8, 7).
 casilla(negra, 6, 7).
 casilla(negra, 7, 8).
-
-
-
