@@ -1,10 +1,17 @@
 :- dynamic (casilla/3).
-:- dynamic (casillaOcupada/3).
-:- discontiguous eliminarFicha/3.
+:- dynamic (casillaTablero/3).
 
 % rules
+jugar :-
+    writeln('Bienvenido a una versión de el juego de damas'),
+    writeln('Para visualizar el tablero (casilla por casilla), escribe: casillaTablero(Ficha, Fila, Columna)'),
+    writeln('Para realizar un movimiento diagonal-derecha escribe: movimientoDD(Ficha, FilaDestino, ColumnaDestino)'),
+    writeln('Para realizar un movimiento diagonal-izquierda escribe: movimientoDI(Ficha, FilaDestino, ColumnaDestino)'),
+    writeln('Las Ficha solo se podrá definir como negra o blanca'),
+    writeln('Si tiene una ficha de color distinto delante diagonal-derecha y la quiere comer escriba: comerFichaDD(MiFicha, FichaQueComere, FilaDestino, ColumnaDestino)'),
+    writeln('Si tiene una ficha de color distinto delante diagonal-izquierda y la quiere comer escriba: comerFichaDI(MiFicha, FichaQueComere, FilaDestino, ColumnaDestino)').
 
-casillaOcupada(Ficha, Fila, Columna):-
+casillaTablero(Ficha, Fila, Columna):-
     casilla(Ficha , Fila, Columna).
 
 comerFichaDD(FichaA, FichaB, FilaDestino, ColumnaDestino):-
@@ -15,7 +22,56 @@ comerFichaDD(FichaA, FichaB, FilaDestino, ColumnaDestino):-
     FilaComer is FilaDestino - 1, 
     ColumnaComer is ColumnaDestino - 1,
     casilla(FichaA, FilaOrigen, ColumnaOrigen),
-    \+ casillaOcupada(FichaA, FilaDestino, ColumnaDestino),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
+    Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
+    Movimiento2 is abs(FilaDestino - FilaOrigen),
+    Movimiento1 == 2,
+    Movimiento2 == 2,
+    asserta(casilla(FichaA, FilaDestino, ColumnaDestino)),
+    retract(casilla(FichaA, FilaOrigen, ColumnaOrigen)),
+    retract(casilla(FichaB, FilaComer, ColumnaComer));
+
+    FichaA == negra,
+    FichaB == blanca,
+    FilaOrigen is FilaDestino + 2,
+    ColumnaOrigen is ColumnaDestino + 2,
+    FilaComer is FilaDestino + 1, 
+    ColumnaComer is ColumnaDestino + 1,
+    casilla(FichaA, FilaOrigen, ColumnaOrigen),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
+    Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
+    Movimiento2 is abs(FilaDestino - FilaOrigen),
+    Movimiento1 == 2,
+    Movimiento2 == 2,
+    asserta(casilla(FichaA, FilaDestino, ColumnaDestino)),
+    retract(casilla(FichaA, FilaOrigen, ColumnaOrigen)),
+    retract(casilla(FichaB, FilaComer, ColumnaComer)).
+
+comerFichaDI(FichaA, FichaB, FilaDestino, ColumnaDestino):-
+    FichaA == blanca,
+    FichaB == negra,
+    FilaOrigen is FilaDestino - 2,
+    ColumnaOrigen is ColumnaDestino + 2,
+    FilaComer is FilaDestino - 1, 
+    ColumnaComer is ColumnaDestino + 1,
+    casilla(FichaA, FilaOrigen, ColumnaOrigen),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
+    Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
+    Movimiento2 is abs(FilaDestino - FilaOrigen),
+    Movimiento1 == 2,
+    Movimiento2 == 2,
+    asserta(casilla(FichaA, FilaDestino, ColumnaDestino)),
+    retract(casilla(FichaA, FilaOrigen, ColumnaOrigen)),
+    retract(casilla(FichaB, FilaComer, ColumnaComer));
+
+    FichaA == negra,
+    FichaB == blanca,
+    FilaOrigen is FilaDestino + 2,
+    ColumnaOrigen is ColumnaDestino - 2,
+    FilaComer is FilaDestino + 1, 
+    ColumnaComer is ColumnaDestino - 1,
+    casilla(FichaA, FilaOrigen, ColumnaOrigen),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 2,
@@ -32,7 +88,7 @@ movimientoDD(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino - 1,
     ColumnaOrigen is ColumnaDestino - 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
-    \+ casillaOcupada(Ficha, FilaDestino, ColumnaDestino),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
@@ -46,7 +102,7 @@ movimientoDD(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino + 1,
     ColumnaOrigen is ColumnaDestino + 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
-    \+ casillaOcupada(Ficha, FilaDestino, ColumnaDestino),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
@@ -63,7 +119,7 @@ movimientoDI(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino - 1,
     ColumnaOrigen is ColumnaDestino + 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
-    \+ casillaOcupada(Ficha, FilaDestino, ColumnaDestino),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
@@ -77,7 +133,7 @@ movimientoDI(Ficha, FilaDestino, ColumnaDestino):-
     FilaOrigen is FilaDestino + 1,
     ColumnaOrigen is ColumnaDestino - 1,
     casilla(Ficha, FilaOrigen, ColumnaOrigen),
-    \+ casillaOcupada(Ficha, FilaDestino, ColumnaDestino),
+    \+ casillaTablero(_, FilaDestino, ColumnaDestino),
     Movimiento1 is abs(ColumnaDestino - ColumnaOrigen),
     Movimiento2 is abs(FilaDestino - FilaOrigen),
     Movimiento1 == 1,
