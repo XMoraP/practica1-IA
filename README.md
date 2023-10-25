@@ -23,6 +23,8 @@ Esta es una versión sencilla y básica del juego de damas españolas.
 2. Sigue las instrucciones que aparecen en la consola.
 3. Utiliza los comandos mencionados para realizar tus movimientos y comidas.
 
+![Tablero](/image/tablero.png)
+
 ### Ejemplo de Uso
 
 ```prolog
