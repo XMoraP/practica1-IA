@@ -5,11 +5,11 @@
 jugar :-
     writeln('Bienvenido a una versión de el juego de damas'),
     writeln('Para visualizar el tablero (casilla por casilla), escribe: casillaTablero(Ficha, Fila, Columna)'),
-    writeln('Para realizar un movimiento diagonal-derecha escribe: movimientoDD(Ficha, FilaDestino, ColumnaDestino)'),
-    writeln('Para realizar un movimiento diagonal-izquierda escribe: movimientoDI(Ficha, FilaDestino, ColumnaDestino)'),
+    writeln('Para realizar un movimiento diagonal-derecha escribe: movimientoDD(ColorFicha, FilaDestino, ColumnaDestino)'),
+    writeln('Para realizar un movimiento diagonal-izquierda escribe: movimientoDI(ColorFicha, FilaDestino, ColumnaDestino)'),
     writeln('Las Ficha solo se podrá definir como negra o blanca'),
-    writeln('Si tiene una ficha de color distinto delante diagonal-derecha y la quiere comer escriba: comerFichaDD(MiFicha, FichaQueComere, FilaDestino, ColumnaDestino)'),
-    writeln('Si tiene una ficha de color distinto delante diagonal-izquierda y la quiere comer escriba: comerFichaDI(MiFicha, FichaQueComere, FilaDestino, ColumnaDestino)').
+    writeln('Si tiene una ficha de color distinto delante diagonal-derecha y la quiere comer escriba: comerFichaDD(ColorMiFicha, FichaQueComere, FilaDestino, ColumnaDestino)'),
+    writeln('Si tiene una ficha de color distinto delante diagonal-izquierda y la quiere comer escriba: comerFichaDI(ColorMiFicha, FichaQueComere, FilaDestino, ColumnaDestino)').
 
 casillaTablero(Ficha, Fila, Columna):-
     casilla(Ficha , Fila, Columna).
