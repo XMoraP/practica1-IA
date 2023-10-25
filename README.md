@@ -1,4 +1,4 @@
-### Juego de Damas Versión 1.0 
+### Juego de Damas  
 
 Esta es una versión sencilla y básica del juego de damas españolas. 
 
@@ -12,8 +12,8 @@ Esta es una versión sencilla y básica del juego de damas españolas.
 #### Comandos Disponibles
 
 - `casillaTablero(Ficha, Fila, Columna)`: Muestra el tablero indicando las casillas que estan ocupadas por una ficha, se debe poner ';' para ir viendo todas las casillas.
-- `movimientoDD(ColorFicha, FilaDestino, ColumnaDestino)`: Realiza un movimiento diagonal hacia la derecha de la ficha a la casilla de destino.
-- `movimientoDI(ColorFicha, FilaDestino, ColumnaDestino)`: Realiza un movimiento diagonal hacia la izquierda de la ficha a la casilla de destino.
+- `movimientoDD(ColorFicha, FilaDestino, ColumnaDestino)`: Realiza un movimiento diagonal de la ficha hacia la derecha, hasta la casilla de destino.
+- `movimientoDI(ColorFicha, FilaDestino, ColumnaDestino)`: Realiza un movimiento diagonal de la ficha hacia la izquierda, hasta la casilla de destino.
 - `comerFichaDD(ColorMiFicha, ColorFichaQueComere, FilaDestino, ColumnaDestino)`: Si una ficha de color distinto está en una posición adecuada para ser comida, esta función la come en el movimiento diagonal-derecha.
 - `comerFichaDI(ColorMiFicha, ColorFichaQueComere, FilaDestino, ColumnaDestino)`: Si una ficha de color distinto está en una posición adecuada para ser comida, esta función la come en el movimiento diagonal-izquierda.
 
@@ -98,4 +98,3 @@ Fila = 2,
 Columna = 1 .
 
 ?-
-``
